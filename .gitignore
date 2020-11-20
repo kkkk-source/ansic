@@ -1,2 +1,3 @@
-# ignore all c compile files
+# ignore c compiled files
 main
+*.c~
