@@ -1,11 +1,11 @@
 #include <stdio.h>
 
-int main() 
+int
+main ()
 {
-    int c;
+  int c;
 
-    while ((c = (getchar() != EOF)))
-        printf("%d\n", c);
-    return 0;
+  while ((c = (getchar () != EOF)))
+    printf ("%d\n", c);
+  return 0;
 }
-

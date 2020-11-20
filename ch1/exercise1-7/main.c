@@ -1,7 +1,8 @@
 #include <stdio.h>
 
-int main()
+int
+main ()
 {
-    fprintf(stderr, "%d", EOF);
-    return 0;
+  fprintf (stderr, "%d", EOF);
+  return 0;
 }

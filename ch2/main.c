@@ -3,6 +3,6 @@
 int
 main ()
 {
-  printf ("hello, world\n");
+  printf ("a: %d\tA: %d\n", 'a', 'A');
   return 0;
 }

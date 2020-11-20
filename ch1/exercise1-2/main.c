@@ -1,7 +1,8 @@
 #include <stdio.h>
 
-int main()
+int
+main ()
 {
-    printf("%c", '\n');
-    return 0;
+  printf ("%c", '\n');
+  return 0;
 }

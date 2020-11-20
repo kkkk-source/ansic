@@ -1,14 +1,17 @@
 #include <stdio.h>
 
-int main() 
+int
+main ()
 {
-    int c, b;
+  int c, b;
 
-    while ((c = getchar()) != EOF) {
-        if (c != ' ' || b != ' ') {
-            putchar(c);
-        }
-        b = c;
+  while ((c = getchar ()) != EOF)
+    {
+      if (c != ' ' || b != ' ')
+	{
+	  putchar (c);
+	}
+      b = c;
     }
-    return 0;
+  return 0;
 }

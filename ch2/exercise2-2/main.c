@@ -1,19 +1,21 @@
 #include <stdio.h>
 #define MAXLINE 100
 
-int main()
+int
+main ()
 {
-    char c, line[MAXLINE];
-    int i = 0;
+  char c, line[MAXLINE];
+  int i = 0;
 
-    while (i < MAXLINE - 1) {
-        if ((c = getchar()) == '\n')
-            break;
-        if (c == EOF)
-            break;
-        line[i++] = c;
+  while (i < MAXLINE - 1)
+    {
+      if ((c = getchar ()) == '\n')
+	break;
+      if (c == EOF)
+	break;
+      line[i++] = c;
     }
-    line[i] = '\0';
-    printf("%s", line);
-    return 0;
+  line[i] = '\0';
+  printf ("%s", line);
+  return 0;
 }

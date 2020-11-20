@@ -1,22 +1,27 @@
 #include <stdio.h>
 
-int main()
+int
+main ()
 {
-    int c;
+  int c;
 
-    while ((c = getchar()) != EOF) {
-        if (c == '\t') {
-            printf("\\t");
-            continue;
-        }
-        if (c == '\b') {
-            printf("\\b");
-            continue;
-        }
-        if (c == '\\') {
-            printf("\\");
-            continue;
-        }
+  while ((c = getchar ()) != EOF)
+    {
+      if (c == '\t')
+	{
+	  printf ("\\t");
+	  continue;
+	}
+      if (c == '\b')
+	{
+	  printf ("\\b");
+	  continue;
+	}
+      if (c == '\\')
+	{
+	  printf ("\\");
+	  continue;
+	}
     }
-    return 0;
+  return 0;
 }
