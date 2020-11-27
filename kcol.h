@@ -1,9 +1,10 @@
-typedef struct __lock_t {
-    int flag;
+typedef struct __lock_t
+{
+  int flag;
 } lock_t;
 
-void init(lock_t *lock);
+void init (lock_t * lock);
 
-void lock(lock_t *lock);
+void lock (lock_t * lock);
 
-void unlock(lock_t *lock);
+void unlock (lock_t * lock);
