@@ -13,7 +13,7 @@ func1 (void *arg)
 {
   int i;
 
-  for (i = 0; i < 1e2; i++)
+  for (i = 0; i < 1e3; i++)
     {
       lock (&k);
       counter = counter + 1;
@@ -29,7 +29,7 @@ func2 (void *arg)
 {
   int i;
 
-  for (i = 0; i < 1e2; i++)
+  for (i = 0; i < 1e3; i++)
     {
       pthread_mutex_lock (&m);
       counter = counter + 1;
@@ -59,10 +59,11 @@ main (int argc, char *argv[])
 	switch (c)
 	  {
 	  case 'n':
-	    f = func1;
+	    init (&k);
+	    f = func2;
 	    break;
 	  case 'm':
-	    f = func2;
+	    f = func1;
 	    break;
 	  default:
 	    fputs ("Usage: main -OPTION\n", stderr);
