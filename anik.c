@@ -1,13 +1,14 @@
 #include <stdio.h>
 
-int
-anik (int times)
+void
+anik (void *arg)
 {
   char runes[5] = { '\\', '|', '/', '-', '\0' };
-  int i, r;
+  int r, *done;
 
-  for (i = 0; i < times; i++)
+  done = (int *) arg;
+  while (*done == 0)
     for (r = 0; r < 4; r++)
-      printf ("\r %c \r", (char) runes[r]);
+      printf ("\r%c\r", (char) runes[r]);
   fputs ("\n", stdout);
 }

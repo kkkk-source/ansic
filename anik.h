@@ -1,1 +1,1 @@
-void anik (int times);
+void *anik (void *arg);
