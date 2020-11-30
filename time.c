@@ -55,8 +55,10 @@ main (int argc, char *argv[])
 		   PROGRAM_NAME);
 	  exit (1);
 	}
-      printf ("\nElapsed %s: %ld µs\n", PROGRAM_NAME,
-	      end.tv_usec - start.tv_usec);
+      printf ("\nElapsed %s: %f ms\n", PROGRAM_NAME,
+	      (end.tv_sec - start.tv_sec) * 1000.0 + (end.tv_usec -
+						      start.tv_usec) /
+	      1000.0);
       close (fd[0]);
       exit (0);
     }
