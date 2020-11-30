@@ -3,9 +3,11 @@
 #include <pthread.h>
 
 #include "kcol.h"
+#include "anki.h"
+
+#define LIMIT 1e3
 
 int counter = 0;
-
 lock_t k;
 
 void *
@@ -13,7 +15,7 @@ func1 (void *arg)
 {
   int i;
 
-  for (i = 0; i < 1e3; i++)
+  for (i = 0; i < LIMIT; i++)
     {
       lock (&k);
       counter = counter + 1;
@@ -29,7 +31,7 @@ func2 (void *arg)
 {
   int i;
 
-  for (i = 0; i < 1e3; i++)
+  for (i = 0; i < LIMIT; i++)
     {
       pthread_mutex_lock (&m);
       counter = counter + 1;
@@ -38,19 +40,11 @@ func2 (void *arg)
   return NULL;
 }
 
-void
-perform_concurrent_execution (pthread_t * p1, pthread_t * p2,
-			      void *(*f) (void *))
-{
-  pthread_create (p1, NULL, f, NULL);
-  pthread_create (p2, NULL, f, NULL);
-}
-
 int
 main (int argc, char *argv[])
 {
-  void *(*f) (void *);
   pthread_t p1, p2;
+  void *(*f) (void *);
   char c;
 
   while (--argc > 0 && (*++argv)[0] == '-')
@@ -69,9 +63,10 @@ main (int argc, char *argv[])
 	    fputs ("Usage: main -OPTION\n", stderr);
 	    exit (0);
 	  }
-	perform_concurrent_execution (&p1, &p2, f);
+	pthread_create (p1, NULL, f, NULL);
+	pthread_create (p2, NULL, f, NULL);
 	pthread_join (p1, NULL);
-	pthread_join (p2, NULL);
+	pthread_join (p1, NULL);
 	printf ("%d\n", counter);
       }
   return 0;
