@@ -3,11 +3,12 @@
 #include <pthread.h>
 
 #include "kcol.h"
-#include "anki.h"
+#include "anik.h"
 
-#define LIMIT 1e3
+#define LIMIT 1e7
 
 int counter = 0;
+pthread_mutex_t m = PTHREAD_MUTEX_INITIALIZER;
 lock_t k;
 
 void *
@@ -23,8 +24,6 @@ func1 (void *arg)
     }
   return NULL;
 }
-
-pthread_mutex_t m = PTHREAD_MUTEX_INITIALIZER;
 
 void *
 func2 (void *arg)
@@ -43,8 +42,9 @@ func2 (void *arg)
 int
 main (int argc, char *argv[])
 {
-  pthread_t p1, p2;
+  pthread_t p1, p2, p3;
   void *(*f) (void *);
+  int done;
   char c;
 
   while (--argc > 0 && (*++argv)[0] == '-')
@@ -53,20 +53,24 @@ main (int argc, char *argv[])
 	switch (c)
 	  {
 	  case 'n':
-	    init (&k);
 	    f = func2;
 	    break;
 	  case 'm':
+	    init (&k);
 	    f = func1;
 	    break;
 	  default:
 	    fputs ("Usage: main -OPTION\n", stderr);
 	    exit (0);
 	  }
-	pthread_create (p1, NULL, f, NULL);
-	pthread_create (p2, NULL, f, NULL);
+	done = 0;
+	pthread_create (&p3, NULL, anik, (void *) &done);
+	pthread_create (&p1, NULL, f, NULL);
+	pthread_create (&p2, NULL, f, NULL);
 	pthread_join (p1, NULL);
-	pthread_join (p1, NULL);
+	pthread_join (p2, NULL);
+	done = 1;
+	pthread_join (p3, NULL);
 	printf ("%d\n", counter);
       }
   return 0;
