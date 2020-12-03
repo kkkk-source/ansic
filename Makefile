@@ -9,3 +9,7 @@ kcol.o: kcol.c
 
 anik.o: anik.c
 	gcc -c anik.c -Wall -Werror
+
+fmt:
+	find . -type f -name '*.c'  -o -name '*.h'  -exec indent {} \;
+	find . -type f -name '*.c~' -o -name '*.h~' -exec rm {} \;
