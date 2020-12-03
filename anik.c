@@ -9,6 +9,6 @@ anik (void *arg)
   done = (int *) arg;
   while (*done == 0)
     for (r = 0; r < 4; r++)
-      printf ("\r%c\r", (char) runes[r]);
+      printf ("\r %c \r", runes[r]);
   fputs ("\n", stdout);
 }
